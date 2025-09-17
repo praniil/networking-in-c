@@ -37,5 +37,13 @@ int main() {
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
+
+    int len, n;
+    len = sizeof(cliaddr);
+    n = recvfrom(sockfd, (char *)buffer, MAXLINE, MSG_WAITALL, (struct sockaddr*)&cliaddr, &len);   //returns the number of bytes read or -1 for error
+    if (n < 0) {
+        perror("error while receiving the bytes from the client");
+    }
+    
     return 0;
 }
